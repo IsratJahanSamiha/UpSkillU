@@ -1,0 +1,165 @@
+import 'package:flutter/material.dart';
+
+class CourseDetailsPage extends StatefulWidget {
+  final Map<String, String> course;
+
+  const CourseDetailsPage({super.key, required this.course});
+
+  @override
+  State<CourseDetailsPage> createState() => _CourseDetailsPageState();
+}
+
+class _CourseDetailsPageState extends State<CourseDetailsPage> {
+  bool isEnrolled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final course = widget.course;
+
+    return Scaffold(
+      appBar:
+
+      PreferredSize(
+        preferredSize: const Size.fromHeight(70.0),
+        child: AppBar(
+          title: const Text("Course Details ",
+            style: TextStyle(
+              color: Colors.white,   // 👈 title color
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.tealAccent, Colors.teal],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+
+          elevation: 0.0,
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white ,
+            ),
+          ),
+        ),
+      ),
+
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Course Image
+            Image.asset(
+              course["image"] ?? 'assets/default.png',
+              width: double.infinity,
+              height: 220,
+              fit: BoxFit.cover,
+            ),
+            const SizedBox(height: 16),
+
+            // Padding for content
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Course Title
+                  Text(
+                    course["title"] ?? "",
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    "Instructor: ${course["instructor"] ?? "Unknown"}",
+                    style: const TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Program Description
+                  const Text(
+                    "Program Description",
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course["description"] ??
+                        "No description available for this course.",
+                    style: const TextStyle(fontSize: 16, height: 1.5),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Schedule
+                  const Text(
+                    "Schedule",
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course["schedule"] ??
+                        "Schedule details will be updated soon.",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Eligibility Criteria
+                  const Text(
+                    "Eligibility Criteria",
+                    style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    course["eligibility"] ??
+                        "Eligibility details will be updated soon.",
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Enroll Button
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          isEnrolled = !isEnrolled;
+                        });
+                      },
+                      icon: Icon(
+                        isEnrolled ? Icons.check_circle : Icons.play_arrow,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        isEnrolled ? "Enrolled" : "Enroll Now",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                        isEnrolled ? Colors.pinkAccent : Colors.blueAccent,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
