@@ -51,25 +51,25 @@ class _SignUpState extends State<SignUp>{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Assalamualaikum",
+                            "Welcome",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.green[800]
+                                color: Colors.blueAccent
                             ),
                           ),
                           Text(
                             "Create Account",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.lightGreen
+                                color: Colors.blueAccent
                             ),
                           ),
                           SizedBox(height: 10,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -106,7 +106,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -143,7 +143,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -180,7 +180,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -217,7 +217,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -254,7 +254,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -291,7 +291,7 @@ class _SignUpState extends State<SignUp>{
                           Container(
                             //margin: EdgeInsets.only(left: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.green[300],
+                                color: Colors.blueAccent,
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -340,14 +340,13 @@ class _SignUpState extends State<SignUp>{
                             // margin: EdgeInsets.fromLTRB(0.00, 100.0,0.0, 0.0),
                             width: w*.2,
                             height: h*.035,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                      "assets/signup.jpg",
-                                    ),
-                                    fit: BoxFit.cover
-                                )
-                            ),
+                            child: Text(
+                              "SignUp",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.blue
+                              ),
+                             ),
                           ),
                         ),
                       ),

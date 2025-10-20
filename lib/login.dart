@@ -25,18 +25,20 @@ class _LogInState extends State<LogIn>{
     return Scaffold(
       backgroundColor: Colors.white ,
 
+
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 80,),
               Container(
-                margin: EdgeInsets.fromLTRB(0.00, 90.0,0.0, 0.0),
+                margin: EdgeInsets.fromLTRB(10.00, 90.0,10.0, 10.0),
                 width: 60,
                 height: 70,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          "assets/eceleratelogo.PNG",
+                          "assets/logo.PNG",
                         ),
                         fit: BoxFit.cover
                     )
@@ -53,21 +55,21 @@ class _LogInState extends State<LogIn>{
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.green[800]
+                          color: Colors.blueAccent,
                       ),
                     ),
                     Text(
                       "Sign In",
                       style: TextStyle(
                           fontSize: 15,
-                          color: Colors.lightGreen
+                          color: Colors.blueAccent
                       ),
                     ),
                     SizedBox(height: 10,),
                     Container(
                       //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                       decoration: BoxDecoration(
-                          color: Colors.green[300],
+                          color: Colors.blueAccent,
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -109,7 +111,7 @@ class _LogInState extends State<LogIn>{
                     Container(
                       //margin: EdgeInsets.only(left: 10,right: 10 ),
                       decoration: BoxDecoration(
-                          color: Colors.green[300],
+                          color: Colors.blueAccent,
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -199,14 +201,7 @@ class _LogInState extends State<LogIn>{
                 // margin: EdgeInsets.fromLTRB(0.00, 100.0,0.0, 0.0),
                 width: w*.2,
                 height: h*.04,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                          "assets/signIn.jpg",
-                        ),
-                        fit: BoxFit.cover
-                    )
-                ),
+
               ),
               SizedBox(height: 20,),
               Container(
@@ -239,7 +234,7 @@ class _LogInState extends State<LogIn>{
                     "Create New Account",
                     style: TextStyle(
                         fontSize: 15,
-                        color: Colors.lightGreen
+                        color: Colors.blueGrey
                     ),
                   ),
                 ),
@@ -250,7 +245,7 @@ class _LogInState extends State<LogIn>{
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
-                    color: Colors.green
+                    color: Colors.blue,
                 ),
               ),
             ],

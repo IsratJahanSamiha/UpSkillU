@@ -50,7 +50,22 @@ This project is middle point for a Flutter application.
 ### ❤️ Enroll
 ![Enroll](assets/screenshot/enrolled.PNG)
 
-### ⭐ Feedback
+### LogIn
+![LogIn](assets/screenshot/login.PNG)
+
+### SignUp
+![SignUp](assets/screenshot/signup.PNG)
+
+### Home
+![Home](assets/screenshot/homepage.PNG)
+
+### Notification
+![Notification](assets/screenshot/notification.PNG)
+
+### Profile
+![Profile](assets/screenshot/profile.PNG)
+
+### Feedback
 ![FeedBack](assets/screenshot/feedback_section.PNG)
 
 
