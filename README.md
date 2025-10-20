@@ -38,20 +38,20 @@ This project is middle point for a Flutter application.
 
 
 ### 📚 Course List
-![Course List](assets/screenshot/coursepage.png)
+![Course List](assets/screenshot/coursepage.PNG)
 
 ### 🎓 Browse
-![Search](assets/screenshot/search.png)
-![Search](assets/screenshot/searchnone.png)
+![Search](assets/screenshot/search.PNG)
+![Search](assets/screenshot/searchnone.PNG)
 
 ### 📖 Course Details
-![Course Details](assets/screenshot/course_details.png)
+![Course Details](assets/screenshot/course_details.PNG)
 
 ### ❤️ Enroll
-![Enroll](assets/screenshot/enrolled.png)
+![Enroll](assets/screenshot/enrolled.PNG)
 
 ### ⭐ Feedback
-![FeedBack](assets/screenshot/feedback_section.png)
+![FeedBack](assets/screenshot/feedback_section.PNG)
 
 
 
