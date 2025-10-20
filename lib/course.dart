@@ -89,7 +89,7 @@ class _CourseState extends State<Course> {
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           title: const Align(
-            alignment: Alignment(0, 0.6),
+            alignment: Alignment(0, 1),
             child: const Text("Choose Your Courses",
               style: TextStyle(
                 color: Colors.white,   // 👈 title color
@@ -105,8 +105,8 @@ class _CourseState extends State<Course> {
                 print('Logo clicked!');
               },
               icon: Image.asset('assets/eceleratelogo.png',
-                height: 50, // 👈 control height
-                width: 50,  // 👈 control width
+                height: 80, // 👈 control height
+                width: 80,  // 👈 control width
               ),
             ),
           ],
