@@ -26,11 +26,11 @@ This project is middle point for a Flutter application.
 
 2. Navigate to the project folder:
    cd UpSkillU
-   
- 3.Install Flutter dependencies:
+
+3.Install Flutter dependencies:
   flutter pub get
   
- 4.Run the app:
+4.Run the app:
   flutter run
 
 
