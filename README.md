@@ -36,6 +36,14 @@ This project is middle point for a Flutter application.
 
 ## 📱 App Screenshots
 
+### LogIn
+![LogIn](assets/screenshot/login.PNG)
+
+### SignUp
+![SignUp](assets/screenshot/signup.PNG)
+
+### Home
+![Home](assets/screenshot/homepage.PNG)
 
 ### 📚 Course List
 ![Course List](assets/screenshot/coursepage.PNG)
@@ -50,14 +58,9 @@ This project is middle point for a Flutter application.
 ### ❤️ Enroll
 ![Enroll](assets/screenshot/enrolled.PNG)
 
-### LogIn
-![LogIn](assets/screenshot/login.PNG)
+### Feedback
+![FeedBack](assets/screenshot/feedback_section.PNG)
 
-### SignUp
-![SignUp](assets/screenshot/signup.PNG)
-
-### Home
-![Home](assets/screenshot/homepage.PNG)
 
 ### Notification
 ![Notification](assets/screenshot/notification.PNG)
@@ -65,8 +68,6 @@ This project is middle point for a Flutter application.
 ### Profile
 ![Profile](assets/screenshot/profile.PNG)
 
-### Feedback
-![FeedBack](assets/screenshot/feedback_section.PNG)
 
 Lot of updates comeing soon.
 
