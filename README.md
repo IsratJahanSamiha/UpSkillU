@@ -68,7 +68,7 @@ This project is middle point for a Flutter application.
 ### Feedback
 ![FeedBack](assets/screenshot/feedback_section.PNG)
 
-
+Lot of updates comeing soon.
 
 A few resources to get you started if this is your first Flutter project:
 
