@@ -24,7 +24,7 @@ class _SignUpState extends State<SignUp>{
             children: [
               Container(
                 width: w,
-                margin: EdgeInsets.only(left:10,top: 10),
+                margin: EdgeInsets.only(left:10,top: 30),
                 child: Stack(
                   fit: StackFit.loose ,
                   children: [
@@ -36,7 +36,7 @@ class _SignUpState extends State<SignUp>{
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage(
-                                  "assets/l2.PNG",
+                                  "assets/logo.PNG",
                                 ),
                                 fit: BoxFit.cover
                             )
@@ -44,9 +44,10 @@ class _SignUpState extends State<SignUp>{
                       ),
                     ),
 
+
                     Container(
                       width: w,
-                      margin: const EdgeInsets.only(left: 20,top: 120 ,right: 30),
+                      margin: const EdgeInsets.only(left: 20,top: 150 ,right: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -55,21 +56,21 @@ class _SignUpState extends State<SignUp>{
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
-                                color: Colors.blueAccent
+                                color: Color(0xFF008080)
                             ),
                           ),
                           Text(
                             "Create Account",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.blueAccent
+                                color: Color(0xFF008080)
                             ),
                           ),
                           SizedBox(height: 10,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -81,12 +82,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   maxLines: 1,
                                   autofocus: false ,
@@ -102,11 +103,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -118,12 +119,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -139,11 +140,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -155,12 +156,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -176,11 +177,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -192,12 +193,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -213,11 +214,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -229,12 +230,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -250,11 +251,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -266,12 +267,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -287,11 +288,11 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(height: 15,),
                           Container(
                             //margin: EdgeInsets.only(left: 10,right: 10 ),
                             decoration: BoxDecoration(
-                                color: Colors.blueAccent,
+                                color: Color(0xFF008080),
                                 borderRadius: BorderRadius.circular(5),
                                 boxShadow: [
                                   BoxShadow(
@@ -303,12 +304,12 @@ class _SignUpState extends State<SignUp>{
                                   )
                                 ]
                             ) ,
-                            height: 30 ,
+                            height: 40 ,
                             width: w ,
                             child: Expanded(
                               flex : 10,
                               child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
                                 child: TextField(
                                   // maxLines: 1,
                                   //autofocus: false ,
@@ -324,14 +325,14 @@ class _SignUpState extends State<SignUp>{
                               ),
                             ) ,
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 25,),
                         ],
                       ),
                     ),
                     //singup image
                     Center(
                       child: Container(
-                        margin: const EdgeInsets.only(top: 470 ),
+                        margin: const EdgeInsets.only(top: 630 ),
                         child: GestureDetector(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
@@ -343,7 +344,8 @@ class _SignUpState extends State<SignUp>{
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
                                   color: Colors.blue
                               ),
                              ),

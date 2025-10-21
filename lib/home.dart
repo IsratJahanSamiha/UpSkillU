@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'course.dart';
+import 'notification.dart';
 
-// ✅ Dummy Course Page
-class CoursePage extends StatelessWidget {
-  const CoursePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class CoursePage extends StatelessWidget {
       ),
     );
   }
-}
+
 
 // ✅ Home Page
 class HomePage extends StatefulWidget {
@@ -91,9 +90,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('No new notifications')),
-              );
+              Navigator.push( context , MaterialPageRoute(builder: (context) => NotificationPage()));
             },
           ),
         ],
@@ -133,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const CoursePage(),
+                            builder: (context) => Course(),
                           ),
                         );
                       } else {

@@ -55,21 +55,21 @@ class _LogInState extends State<LogIn>{
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.blueAccent,
+                          color: Color(0xFF008080),
                       ),
                     ),
                     Text(
                       "Sign In",
                       style: TextStyle(
                           fontSize: 15,
-                          color: Colors.blueAccent
+                          color: Color(0xFF008080)
                       ),
                     ),
                     SizedBox(height: 10,),
                     Container(
                       //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
                       decoration: BoxDecoration(
-                          color: Colors.blueAccent,
+                          color: Color(0xFF008080),
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -81,12 +81,12 @@ class _LogInState extends State<LogIn>{
                             )
                           ]
                       ) ,
-                      height: 30 ,
+                      height: 40 ,
                       width: w ,
                       child: Expanded(
                         flex : 10,
                         child: Container(
-                          margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                          margin: EdgeInsets.only(left: 10 ,right: 10, top: 7),
                           child: TextField(
                             /* onChanged: (value){
                               setState(() {
@@ -96,7 +96,7 @@ class _LogInState extends State<LogIn>{
                             // maxLines: 1,
                             //autofocus: false ,
                             style: TextStyle(
-                              color: Color(0xFF3F7F43),
+                              color: Color(0xFF008080),
                               fontSize: 15,
                             ) ,
                             decoration: InputDecoration(
@@ -111,7 +111,7 @@ class _LogInState extends State<LogIn>{
                     Container(
                       //margin: EdgeInsets.only(left: 10,right: 10 ),
                       decoration: BoxDecoration(
-                          color: Colors.blueAccent,
+                          color: Color(0xFF008080),
                           borderRadius: BorderRadius.circular(5),
                           boxShadow: [
                             BoxShadow(
@@ -123,12 +123,12 @@ class _LogInState extends State<LogIn>{
                             )
                           ]
                       ) ,
-                      height: 30 ,
+                      height: 40 ,
                       width: w ,
                       child: Expanded(
                         flex : 10,
                         child: Container(
-                          margin: EdgeInsets.only(left: 10 ,right: 10, top: 14),
+                          margin: EdgeInsets.only(left: 10 ,right: 10, top: 7),
                           child: TextField(
                             /*   onChanged: (value){
                               setState(() {
@@ -138,7 +138,7 @@ class _LogInState extends State<LogIn>{
                             // maxLines: 1,
                             //autofocus: false ,
                             style: TextStyle(
-                              color: Color(0xFF3F7F43),
+                              color: Color(0xFF008080),
                               fontSize: 15,
                             ) ,
                             decoration: InputDecoration(
@@ -157,7 +157,7 @@ class _LogInState extends State<LogIn>{
                           "Foreget Password",
                           style: TextStyle(
                               fontSize: 12,
-                              color: Colors.green[800]
+                              color: Color(0xFF008080)
                           ),
                         ),
                       ],
@@ -245,7 +245,7 @@ class _LogInState extends State<LogIn>{
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
-                    color: Colors.blue,
+                    color: Color(0xFF008080),
                 ),
               ),
             ],

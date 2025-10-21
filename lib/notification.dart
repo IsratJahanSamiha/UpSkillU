@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatelessWidget {
-  static const Color mainPurple = Color(0xFFA5A6F6);
+  static const Color mainPurple = Color(0xFF008080);
   const NotificationPage({Key? key}) : super(key: key);
 
   @override
