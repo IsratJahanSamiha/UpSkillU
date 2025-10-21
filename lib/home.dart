@@ -1,26 +1,8 @@
 import 'package:flutter/material.dart';
 import 'course.dart';
 import 'notification.dart';
+import 'profile.dart';
 
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Courses'),
-        backgroundColor: const Color(0xFF008080),
-      ),
-      body: const Center(
-        child: Text(
-          'Welcome to the Course Page!',
-          style: TextStyle(fontSize: 18),
-        ),
-      ),
-    );
-  }
-
-
-// ✅ Home Page
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -30,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
+  final TextEditingController _searchController = TextEditingController();
 
   final List<Map<String, dynamic>> categories = [
     {'title': 'Courses', 'icon': Icons.school},
@@ -38,13 +21,18 @@ class _HomePageState extends State<HomePage> {
     {'title': 'Faculties', 'icon': Icons.people},
   ];
 
+  final List<String> recentCourses = [
+    'Flutter Development',
+    'Data Science Basics',
+    'Web Design Essentials',
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
     switch (index) {
       case 0:
-      // Home
         break;
       case 1:
         ScaffoldMessenger.of(context).showSnackBar(
@@ -53,12 +41,13 @@ class _HomePageState extends State<HomePage> {
         break;
       case 2:
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Notifications Page (Coming Soon)')),
+          const SnackBar(content: Text('Setting Page (Coming Soon)')),
         );
         break;
       case 3:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Profile Page (Coming Soon)')),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
         );
         break;
     }
@@ -90,7 +79,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              Navigator.push( context , MaterialPageRoute(builder: (context) => NotificationPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NotificationPage()));
             },
           ),
         ],
@@ -102,6 +92,79 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // 🔍 Search Bar
+            TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: 'Search courses...',
+                prefixIcon: const Icon(Icons.search, color: Color(0xFF008080)),
+                filled: true,
+                fillColor: Colors.white,
+                contentPadding:
+                const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // 🧠 Recent Courses Section
+            const Text(
+              'Recent Courses',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF008080),
+              ),
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: recentCourses.length,
+                itemBuilder: (context, index) {
+                  final course = recentCourses[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Course()));
+                    },
+                    child: Container(
+                      width: 160,
+                      margin: const EdgeInsets.only(right: 12),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 4,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          course,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // 📚 Categories Section
             const Text(
               'Categories',
               style: TextStyle(
@@ -112,7 +175,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 16),
 
-            // 🧱 GridView
+            // 🧱 GridView for categories
             Expanded(
               child: GridView.builder(
                 itemCount: categories.length,
@@ -135,7 +198,8 @@ class _HomePageState extends State<HomePage> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('${category['title']} tapped')),
+                          SnackBar(
+                              content: Text('${category['title']} tapped')),
                         );
                       }
                     },
@@ -187,7 +251,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
-          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Alerts'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
