@@ -68,6 +68,14 @@ This project is middle point for a Flutter application.
 ### Profile
 ![Profile](assets/screenshot/profile.PNG)
 
+## 🎬 App Demo
+
+<a href="https://youtube.com/shorts/-wZjWKIYC_c" target="_blank">
+  <img src="https://img.youtube.com/vi/-wZjWKIYC_c/0.jpg" alt="Watch the demo" width="600" />
+</a>
+
+> 📱 Click the image above to watch the demo video on YouTube.
+
 
 Lot of updates comeing soon.
 
