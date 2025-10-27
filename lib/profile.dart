@@ -10,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  static const Color mainTeal = Color(0xFF008080);
+  static const Color mainTeal = Color(0xFFA5A6F6);
   bool isLoggingOut = false;
 
   @override
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Center(
               child: CircleAvatar(
                 radius: 48,
-                backgroundColor: mainTeal,
+                backgroundColor: Color(0xFFA5A6F6),
                 child: const Icon(Icons.person, size: 48, color: Colors.white),
               ),
             ),
@@ -61,11 +61,14 @@ class _ProfilePageState extends State<ProfilePage> {
             // 📊 Stats
             Card(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(16),
+              ),
               elevation: 2,
               child: Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 20,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -106,20 +109,21 @@ class _ProfilePageState extends State<ProfilePage> {
             // 🚪 Logout Button
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: mainTeal,
+                backgroundColor: Color(0xFFA5A6F6),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 minimumSize: const Size(double.infinity, 48),
               ),
               icon: isLoggingOut
                   ? const SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2,
-                  color: Colors.white,
-                ),
-              )
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
                   : const Icon(Icons.logout, color: Colors.white),
               label: Text(
                 isLoggingOut ? "Logging out..." : "Log Out",
@@ -128,10 +132,10 @@ class _ProfilePageState extends State<ProfilePage> {
               onPressed: isLoggingOut
                   ? null
                   : () async {
-                setState(() => isLoggingOut = true);
-                await authProvider.logout(context);
-                setState(() => isLoggingOut = false);
-              },
+                      setState(() => isLoggingOut = true);
+                      await authProvider.logout(context);
+                      setState(() => isLoggingOut = false);
+                    },
             ),
           ],
         ),
@@ -145,11 +149,16 @@ class _ProfilePageState extends State<ProfilePage> {
         Text(
           value,
           style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: mainTeal),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: mainTeal,
+          ),
         ),
         const SizedBox(height: 4),
-        Text(label,
-            style: const TextStyle(fontSize: 13, color: Colors.black54)),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 13, color: Colors.black54),
+        ),
       ],
     );
   }
@@ -165,8 +174,10 @@ class _ProfilePageState extends State<ProfilePage> {
       margin: const EdgeInsets.symmetric(vertical: 6),
       child: ListTile(
         leading: Icon(icon, color: mainTeal),
-        title: Text(title,
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15)),
+        title: Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+        ),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: onTap,
       ),

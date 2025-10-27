@@ -72,7 +72,7 @@ class _NotificationPageState extends State<NotificationPage> {
       backgroundColor: const Color(0xFFF7F8FC),
 
       appBar: AppBar(
-        backgroundColor: const Color(0xFF008080),
+        backgroundColor: const Color(0xFFA5A6F6),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -80,81 +80,78 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         title: const Text(
           'Notifications',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
 
       body: notifications.isEmpty
           ? const Center(
-        child: Text(
-          'No new notifications 😊',
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.grey,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      )
-          : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: notifications.length,
-        itemBuilder: (context, index) {
-          final item = notifications[index];
-          final icon = _getIcon(item['type']);
-          final color = _getColor(item['type']);
-
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 3,
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: color.withOpacity(0.15),
-                radius: 25,
-                child: Icon(icon, color: color, size: 28),
-              ),
-              title: Text(
-                item['title'],
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black87,
+              child: Text(
+                'No new notifications 😊',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 4),
-                  Text(
-                    item['message'],
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: notifications.length,
+              itemBuilder: (context, index) {
+                final item = notifications[index];
+                final icon = _getIcon(item['type']);
+                final color = _getColor(item['type']);
+
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 3,
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: color.withOpacity(0.15),
+                      radius: 25,
+                      child: Icon(icon, color: color, size: 28),
+                    ),
+                    title: Text(
+                      item['title'],
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 4),
+                        Text(
+                          item['message'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          item['time'],
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.more_vert, color: Colors.grey),
+                      onPressed: () {},
                     ),
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    item['time'],
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              trailing: IconButton(
-                icon: const Icon(Icons.more_vert, color: Colors.grey),
-                onPressed: () {},
-              ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

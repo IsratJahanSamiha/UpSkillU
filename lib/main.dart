@@ -5,8 +5,7 @@ import 'auth_provider.dart';
 import 'login.dart';
 import 'signup.dart';
 import 'feedback_provider.dart';
-
-
+import 'course_provider.dart';
 
 void main() {
   runApp(
@@ -14,6 +13,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => FeedbackProvider()),
+        ChangeNotifierProvider(create: (_) => CourseProvider()),
       ],
       child: UpSkillUApp(),
     ),
@@ -53,13 +53,12 @@ class UpSkillUApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[200],
       ),
 
-        initialRoute: '/login',
-        routes: {
-          '/login': (context) => const LogIn(),
-          '/signup': (context) => const SignUp(),
-          '/home': (context) => const HomePage(),
-        },
-
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LogIn(),
+        '/signup': (context) => const SignUp(),
+        '/home': (context) => const HomePage(),
+      },
     );
   }
 }

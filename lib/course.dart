@@ -1,6 +1,7 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'course_details.dart' ;
+import 'package:provider/provider.dart';
+import 'course_details.dart';
+import 'course_provider.dart';
 
 class Course extends StatefulWidget {
   @override
@@ -8,294 +9,308 @@ class Course extends StatefulWidget {
 }
 
 class _CourseState extends State<Course> {
-
   List<Map<String, String>> allCourses = [];
   List<Map<String, String>> filteredCourses = [];
   bool isLoading = true;
   TextEditingController searchController = TextEditingController();
 
+  int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
-
-    // Simulate data loading (like fetching from API)
-    Future.delayed(const Duration(seconds: 2), () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider = Provider.of<CourseProvider>(context, listen: false);
       setState(() {
-        isLoading = false;
-        allCourses = [
-          {
-            "title": "Flutter Development",
-            "instructor": "Angela Yu",
-            "image": "assets/flutter_logo.png",
-            "startDate": "25 Oct 2025",
-            "description":
-            "Learn how to build cross-platform mobile apps with Flutter"
-                "Covers Dart basics, UI design, and backend integration."
-          },
-          {
-            "title": "Web Design Basics",
-            "instructor": "John Smith",
-            "image": "assets/weblogo.png",
-            "startDate": "25 Oct 2025",
-            "description":
-            "Master HTML, CSS, and responsive design to create stunning websites."
-          },
-          {
-            "title": "Python for Beginners",
-            "instructor": "Jane Doe",
-            "image": "assets/pythonlogo.png",
-            "startDate": "25 Oct 2025",
-            "description":
-            "A beginner-friendly guide to Python — from syntax to automation projects."
-          },
-          {
-            "title": "Java for Beginners",
-            "instructor": "Jane Doe",
-            "image": "assets/javalogo.png",
-            "startDate": "25 Oct 2025",
-            "description":
-            "A beginner-friendly guide to Java — from syntax to automation projects."
-          },
-        ];
+        isLoading = provider.isLoading;
+        allCourses = List<Map<String, String>>.from(provider.courses);
         filteredCourses = allCourses;
-      }
-      );
-    }
-    );
+      });
+    });
   }
 
-  // Function to filter courses based on search text
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    // Handle navigation logic here
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/tasks');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/feedback');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/profile');
+        break;
+    }
+  }
+
   void filterCourses(String query) {
-    final results = allCourses.where((course) {
-      final title = course["title"]!.toLowerCase();
-      final instructor = course["instructor"]!.toLowerCase();
-      final input = query.toLowerCase();
+    final provider = Provider.of<CourseProvider>(context, listen: false);
+    final base = provider.courses;
+    final input = query.toLowerCase();
+    final results = base.where((course) {
+      final title = (course['title'] ?? '').toLowerCase();
+      final instructor = (course['instructor'] ?? '').toLowerCase();
       return title.contains(input) || instructor.contains(input);
     }).toList();
 
     setState(() => filteredCourses = results);
   }
 
-
   @override
   Widget build(BuildContext context) {
-   // Size size = MediaQuery.of(context).size;
-   // double w = MediaQuery.of(context).size.width;
-   // double h = MediaQuery.of(context).size.height;
     return Scaffold(
-      // backgroundColor: Theme.of(context).primaryColor ,
-      appBar:
-      PreferredSize(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
           title: const Align(
             alignment: Alignment(0, 1),
-            child: const Text("Choose Your Courses",
+            child: Text(
+              "Choose Your Courses",
               style: TextStyle(
-                color: Colors.white,   // 👈 title color
+                color: Colors.white,
                 fontSize: 23,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-
           actions: [
             IconButton(
               onPressed: () {
                 print('Logo clicked!');
               },
-              icon: Image.asset('assets/eceleratelogo.png',
-                height: 80, // 👈 control height
-                width: 80,  // 👈 control width
+              icon: Image.asset(
+                'assets/eceleratelogo.png',
+                height: 80,
+                width: 80,
               ),
             ),
           ],
-
           centerTitle: true,
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.tealAccent, Colors.teal],
+                colors: [Color(0xFFA5A6F6), Color(0xFF8A8BF0)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
             ),
           ),
-
           elevation: 0.0,
           leading: GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.white ,
-            ),
+            child: const Icon(Icons.arrow_back, color: Colors.white),
           ),
         ),
       ),
-      // backgroundColor: Theme.of(context).primaryColor ,
 
+      body: Consumer<CourseProvider>(
+        builder: (context, provider, _) {
+          if (provider.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
+          if (allCourses.isEmpty) {
+            allCourses = List<Map<String, String>>.from(provider.courses);
+            filteredCourses = allCourses;
+          }
 
-
-      body:
-      isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-          children: [
-      // 🔍 Search Bar
-      Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: TextField(
-        controller: searchController,
-        onChanged: filterCourses,
-        decoration: InputDecoration(
-          hintText: "Search courses...",
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: Colors.grey.shade100,
-          contentPadding:
-          const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-    ),
-            // 2️⃣ Suggested Courses Text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Suggested Courses",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey.shade800,
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: TextField(
+                  controller: searchController,
+                  onChanged: filterCourses,
+                  decoration: InputDecoration(
+                    hintText: "Search courses...",
+                    prefixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
                   ),
                 ),
               ),
-            ),
-
-           // SizedBox(height: 20,),
-
-            // 📋 Course List
-            Expanded(
-              child: filteredCourses.isEmpty
-                  ? const Center(
-                child: Text(
-                  "No course found 😢",
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
                 ),
-              )
-                  : ListView.builder(
-                itemCount: filteredCourses.length,
-                itemBuilder: (context, index) {
-                  final course = filteredCourses[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              CourseDetailsPage(course: course),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Suggested Courses",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade800,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: filteredCourses.isEmpty
+                    ? const Center(
+                        child: Text(
+                          "No course found 😢",
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
-                      );
-                    },
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      elevation: 3,
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              bottomLeft: Radius.circular(16),
-                            ),
-                            child: Image.asset(
-                              course["image"]!,
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10),
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                      )
+                    : ListView.builder(
+                        itemCount: filteredCourses.length,
+                        itemBuilder: (context, index) {
+                          final course = filteredCourses[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      CourseDetailsPage(course: course),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 10,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              elevation: 3,
+                              child: Row(
                                 children: [
-                                  Text(
-                                    course["title"]!,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                  ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      bottomLeft: Radius.circular(16),
+                                    ),
+                                    child: Image.asset(
+                                      course["image"] ?? 'assets/logo.PNG',
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Instructor: ${course["instructor"]}",
-                                    style: const TextStyle(
-                                        color: Colors.grey),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Start Date: ${course["startDate"]?? "Coming Soon"}",
-                                    style: const TextStyle(
-                                        color: Colors.grey),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    course["description"]!,
-                                    style: const TextStyle(
-                                        color: Colors.grey),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  const Row(
-                                    children: [
-                                      Icon(Icons.star,
-                                          color: Colors.amber,
-                                          size: 18),
-                                      Icon(Icons.star,
-                                          color: Colors.amber,
-                                          size: 18),
-                                      Icon(Icons.star,
-                                          color: Colors.amber,
-                                          size: 18),
-                                      Icon(Icons.star_half,
-                                          color: Colors.amber,
-                                          size: 18),
-                                      Icon(Icons.star_border,
-                                          color: Colors.amber,
-                                          size: 18),
-                                    ],
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            course["title"] ?? '',
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            "Instructor: ${course["instructor"] ?? 'Unknown'}",
+                                            style: const TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            "Start Date: ${course["startDate"] ?? "Coming Soon"}",
+                                            style: const TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            course["description"] ?? '',
+                                            style: const TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          const Row(
+                                            children: [
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              ),
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              ),
+                                              Icon(
+                                                Icons.star,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              ),
+                                              Icon(
+                                                Icons.star_half,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              ),
+                                              Icon(
+                                                Icons.star_border,
+                                                color: Colors.amber,
+                                                size: 18,
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          )
-                        ],
+                          );
+                        },
                       ),
-                    ),
-                  );
-                },
               ),
-            ),
-          ],
+            ],
+          );
+        },
       ),
 
-
+      // ✅ Bottom Navigation Bar
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color(0xFFA5A6F6),
+        selectedItemColor: const Color(0xFF008080),
+        unselectedItemColor: Colors.black54,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feedback),
+            label: 'Feedback',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
     );
   }
 }
-

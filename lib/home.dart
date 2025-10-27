@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'course.dart';
+import 'package:provider/provider.dart';
+import 'course_provider.dart';
 import 'notification.dart';
 import 'profile.dart';
 import 'feedback_page.dart';
@@ -22,11 +24,8 @@ class _HomePageState extends State<HomePage> {
     {'title': 'Faculties', 'icon': Icons.people},
   ];
 
-  final List<String> recentCourses = [
-    'Flutter Development',
-    'Data Science Basics',
-    'Web Design Essentials',
-  ];
+  // recentCourses now comes from CourseProvider (mock API). We keep a local
+  // placeholder while the provider loads.
 
   void _onItemTapped(int index) {
     setState(() {
@@ -63,7 +62,7 @@ class _HomePageState extends State<HomePage> {
 
       // ✅ AppBar
       appBar: AppBar(
-        backgroundColor: const Color(0xFF008080),
+        backgroundColor: const Color(0xFFA5A6F6),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -72,18 +71,17 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         title: const Text(
-          'Welcome, Jahan 👋',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+          'Welcome,User👋 at Exclerate',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => NotificationPage()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationPage()),
+              );
             },
           ),
         ],
@@ -103,8 +101,10 @@ class _HomePageState extends State<HomePage> {
                 prefixIcon: const Icon(Icons.search, color: Color(0xFF008080)),
                 filled: true,
                 fillColor: Colors.white,
-                contentPadding:
-                const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 0,
+                  horizontal: 16,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
@@ -124,43 +124,77 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 100,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: recentCourses.length,
-                itemBuilder: (context, index) {
-                  final course = recentCourses[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Course()));
-                    },
-                    child: Container(
-                      width: 160,
-                      margin: const EdgeInsets.only(right: 12),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
+              height: 120,
+              child: Consumer<CourseProvider>(
+                builder: (context, provider, _) {
+                  if (provider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (provider.courses.isEmpty) {
+                    return const Center(child: Text('No recent courses'));
+                  }
+
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: provider.courses.length,
+                    itemBuilder: (context, index) {
+                      final course = provider.courses[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Course()),
+                          );
+                        },
+                        child: Container(
+                          width: 180,
+                          margin: const EdgeInsets.only(right: 12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Text(
-                          course,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    course['image'] ?? 'assets/logo.PNG',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8.0,
+                                  vertical: 6.0,
+                                ),
+                                child: Text(
+                                  course['title'] ?? 'Untitled',
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
               ),
@@ -195,14 +229,13 @@ class _HomePageState extends State<HomePage> {
                       if (category['title'] == 'Courses') {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => Course(),
-                          ),
+                          MaterialPageRoute(builder: (context) => Course()),
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                              content: Text('${category['title']} tapped')),
+                            content: Text('${category['title']} tapped'),
+                          ),
                         );
                       }
                     },
@@ -221,8 +254,11 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(category['icon'],
-                              size: 40, color: const Color(0xFF008080)),
+                          Icon(
+                            category['icon'],
+                            size: 40,
+                            color: const Color(0xFF008080),
+                          ),
                           const SizedBox(height: 8),
                           Text(
                             category['title'],
@@ -246,7 +282,7 @@ class _HomePageState extends State<HomePage> {
       // ✅ Bottom Navigation
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFA5A6F6),
         selectedItemColor: const Color(0xFF008080),
         unselectedItemColor: Colors.black54,
         currentIndex: _selectedIndex,
@@ -254,7 +290,10 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
-          BottomNavigationBarItem(icon: Icon(Icons.feedback), label: 'Feedback'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feedback),
+            label: 'Feedback',
+          ),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
