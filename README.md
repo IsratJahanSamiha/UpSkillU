@@ -76,9 +76,13 @@ This project is middle point for a Flutter application.
 
 > 📱 Click the image above to watch the demo video on YouTube.
 
+
+
 ## 🎬 App Demo With State management , Mock API, Form Validations 
 
-[![Watch the demo](https://img.youtube.com/vi/iwin116q-3Y/0.jpg)](https://youtube.com/shorts/iwin116q-3Y?feature=share)
+<a href="https://youtu.be/Nca3qqsOyVU" target="_blank">
+  <img src="https://img.youtube.com/vi/Nca3qqsOyVU/0.jpg" alt="Watch the demo" width="600" />
+</a>
 
 > 📱 Click the image above to watch the demo video on YouTube.
 
