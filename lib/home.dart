@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'course.dart';
 import 'notification.dart';
 import 'profile.dart';
+import 'feedback_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,9 +40,11 @@ class _HomePageState extends State<HomePage> {
           const SnackBar(content: Text('Tasks Page (Coming Soon)')),
         );
         break;
+
       case 2:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('FeedBack (Coming Soon)')),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeedbackPage()),
         );
         break;
       case 3:

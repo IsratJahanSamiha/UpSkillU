@@ -4,6 +4,8 @@ import 'package:upskillu/home.dart';
 import 'auth_provider.dart';
 import 'login.dart';
 import 'signup.dart';
+import 'feedback_provider.dart';
+
 
 
 void main() {
@@ -11,6 +13,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => FeedbackProvider()),
       ],
       child: UpSkillUApp(),
     ),
