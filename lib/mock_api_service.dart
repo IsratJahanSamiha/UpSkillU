@@ -45,6 +45,18 @@ class MockApiService {
       'schedule': 'Weekend, 10am-1pm',
       'eligibility': 'No prerequisites',
     },
+    {
+      'id': '4',
+      'title': 'Java for Beginners',
+      'description':
+          'A practical introduction to Java programming: basics, OOP, and simple projects to build confidence.',
+      'duration': '5 weeks',
+      'image': 'assets/javalogo.png',
+      'instructor': 'Jane Doe',
+      'startDate': '10 Jan 2026',
+      'schedule': 'Mon & Wed, 7-9pm',
+      'eligibility': 'No prerequisites',
+    },
   ];
 
   /// Simulates fetching courses from a backend with a short delay.
