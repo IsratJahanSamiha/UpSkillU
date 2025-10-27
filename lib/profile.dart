@@ -3,204 +3,172 @@ import 'package:provider/provider.dart';
 import 'auth_provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key}); // ✅ super parameter
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  static const Color mainPurple = Color(0xFF008080);
+  static const Color mainTeal = Color(0xFF008080);
+  bool isLoggingOut = false;
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // 🟣 Header with avatar
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    height: 140,
-                    width: double.infinity,
-                    color: mainPurple,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12, top: 8),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.arrow_back,
-                              color: Colors.white, size: 28),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 70,
-                    left: 0,
-                    right: 0,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: 92,
-                        height: 92,
-                        decoration: BoxDecoration(
-                          color: mainPurple,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: Colors.blueGrey.withOpacity(0.3)),
-                        ),
-                        child: const Icon(Icons.person,
-                            size: 42, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 60),
-
-              // 🩶 Profile Info Section
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(18),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 6,
-                        offset: Offset(0, 2))
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    const Text('Full Name',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 6),
-                    const Text('School/University Name',
-                        style: TextStyle(
-                            fontSize: 13, color: Colors.black54)),
-                    const SizedBox(height: 20),
-
-                    // Stats Row
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _statBox('120', 'Cumulative\nCredits'),
-                        const SizedBox(width: 10),
-                        _statBox('3.8', 'Cumulative\nGrade Points'),
-                        const SizedBox(width: 10),
-                        _statBox('3.7', 'Cumulative\nGPA'),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Action buttons
-                    _roundedAction(context, 'Enrolled Courses', () {
-                      Navigator.pushNamed(context, '/programs');
-                    }),
-                    const SizedBox(height: 12),
-                    _roundedAction(context, 'Completed Courses', () {
-                      Navigator.pushNamed(context, '/programs');
-                    }),
-                    const SizedBox(height: 12),
-                    _roundedAction(context, 'Activities & Badges', () {}),
-                    const SizedBox(height: 12),
-                    _roundedAction(context, 'Settings', () {}),
-                    const SizedBox(height: 18),
-
-                    // ✅ Logout Button
-                    GestureDetector(
-                      onTap: () async {
-                        await authProvider.logout(context);
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 26, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: mainPurple,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                              color: Colors.blueGrey.withOpacity(0.2)),
-                        ),
-                        child: const Text(
-                          'Log Out',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ],
-          ),
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        backgroundColor: mainTeal,
+        elevation: 0,
+        title: const Text(
+          'My Profile',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
-    );
-  }
-
-  Widget _statBox(String value, String label) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            width: 66,
-            height: 42,
-            decoration: BoxDecoration(
-              color: mainPurple,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.blueGrey.withOpacity(0.2)),
-            ),
-            child: Center(
-              child: Text(value,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(label,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12, color: Colors.black54)),
-        ],
-      ),
-    );
-  }
-
-  Widget _roundedAction(BuildContext context, String text, VoidCallback onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          color: mainPurple,
-          borderRadius: BorderRadius.circular(28),
-          border: Border.all(color: Colors.blueGrey.withOpacity(0.2)),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
           children: [
-            Expanded(
-              child: Text(
-                text,
-                style: const TextStyle(
-                    color: Colors.white, fontWeight: FontWeight.w600),
+            // 🧍 Profile Avatar
+            Center(
+              child: CircleAvatar(
+                radius: 48,
+                backgroundColor: mainTeal,
+                child: const Icon(Icons.person, size: 48, color: Colors.white),
               ),
             ),
-            const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
+            const SizedBox(height: 12),
+
+            // 🏫 User Info
+            const Text(
+              'Full Name',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              'School/University Name',
+              style: TextStyle(color: Colors.black54, fontSize: 14),
+            ),
+
+            const SizedBox(height: 20),
+
+            // 📊 Stats
+            Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              elevation: 2,
+              child: Padding(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildStatItem('120', 'Credits'),
+                    _buildStatItem('3.8', 'Grade Points'),
+                    _buildStatItem('3.7', 'GPA'),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // ⚙️ Action Buttons
+            _buildMenuItem(
+              icon: Icons.book,
+              title: 'Enrolled Courses',
+              onTap: () => Navigator.pushNamed(context, '/programs'),
+            ),
+            _buildMenuItem(
+              icon: Icons.check_circle,
+              title: 'Completed Courses',
+              onTap: () => Navigator.pushNamed(context, '/programs'),
+            ),
+            _buildMenuItem(
+              icon: Icons.emoji_events,
+              title: 'Activities & Badges',
+              onTap: () {},
+            ),
+            _buildMenuItem(
+              icon: Icons.settings,
+              title: 'Settings',
+              onTap: () {},
+            ),
+
+            const SizedBox(height: 24),
+
+            // 🚪 Logout Button
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: mainTeal,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                minimumSize: const Size(double.infinity, 48),
+              ),
+              icon: isLoggingOut
+                  ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Colors.white,
+                ),
+              )
+                  : const Icon(Icons.logout, color: Colors.white),
+              label: Text(
+                isLoggingOut ? "Logging out..." : "Log Out",
+                style: const TextStyle(color: Colors.white),
+              ),
+              onPressed: isLoggingOut
+                  ? null
+                  : () async {
+                setState(() => isLoggingOut = true);
+                await authProvider.logout(context);
+                setState(() => isLoggingOut = false);
+              },
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(String value, String label) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: mainTeal),
+        ),
+        const SizedBox(height: 4),
+        Text(label,
+            style: const TextStyle(fontSize: 13, color: Colors.black54)),
+      ],
+    );
+  }
+
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 1,
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      child: ListTile(
+        leading: Icon(icon, color: mainTeal),
+        title: Text(title,
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15)),
+        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        onTap: onTap,
       ),
     );
   }
