@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         break;
       case 2:
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Setting Page (Coming Soon)')),
+          const SnackBar(content: Text('FeedBack (Coming Soon)')),
         );
         break;
       case 3:
@@ -251,7 +251,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.feedback), label: 'Feedback'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

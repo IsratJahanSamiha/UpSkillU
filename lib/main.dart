@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:upskillu/home.dart';
 import 'auth_provider.dart';
 import 'login.dart';
+import 'signup.dart';
 
 
 void main() {
@@ -42,12 +44,19 @@ class UpSkillUApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'UpSkillU',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFFA5A6F6),
         scaffoldBackgroundColor: Colors.grey[200],
       ),
-      debugShowCheckedModeBanner: false,
-      home:LogIn(),
+
+        initialRoute: '/login',
+        routes: {
+          '/login': (context) => const LogIn(),
+          '/signup': (context) => const SignUp(),
+          '/home': (context) => const HomePage(),
+        },
+
     );
   }
 }

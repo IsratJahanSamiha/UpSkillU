@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'auth_provider.dart';
 
-class ProfilePage extends StatelessWidget {
-  static const Color mainPurple = Color(0xFF008080);
-
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  static const Color mainPurple = Color(0xFF008080);
+
+  @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header area and overlapping card
+              // Header and avatar
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  // Purple header
                   Container(
                     height: 140,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: mainPurple,
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                      ),
-                    ),
+                    color: mainPurple,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 12, top: 8),
                       child: Align(
@@ -40,8 +42,6 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Center avatar
                   Positioned(
                     top: 32,
                     left: 0,
@@ -64,10 +64,8 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Card body overlapping header
                   Positioned(
-                    top: 80,
+                    top: 90,
                     left: 20,
                     right: 20,
                     child: Container(
@@ -84,7 +82,6 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          const SizedBox(height: 4),
                           const Text('Full Name',
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold)),
@@ -92,10 +89,7 @@ class ProfilePage extends StatelessWidget {
                           const Text('School/University Name',
                               style: TextStyle(
                                   fontSize: 13, color: Colors.black54)),
-
                           const SizedBox(height: 20),
-
-                          // Stats row
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -106,10 +100,7 @@ class ProfilePage extends StatelessWidget {
                               _statBox('3.7', 'Cumulative\nGPA'),
                             ],
                           ),
-
                           const SizedBox(height: 20),
-
-                          // Action buttons
                           _roundedAction(context, 'Enrolled Courses', () {
                             Navigator.pushNamed(context, '/programs');
                           }),
@@ -118,20 +109,16 @@ class ProfilePage extends StatelessWidget {
                             Navigator.pushNamed(context, '/programs');
                           }),
                           const SizedBox(height: 12),
-                          _roundedAction(context, 'Activities & Badges', () {
-                            // No navigation for this placeholder, could be pushNamed('/activities')
-                          }),
+                          _roundedAction(context, 'Activities & Badges', () {}),
                           const SizedBox(height: 12),
-                          _roundedAction(context, 'Settings', () {
-                            // No navigation for this placeholder, could be pushNamed('/settings')
-                          }),
+                          _roundedAction(context, 'Settings', () {}),
                           const SizedBox(height: 18),
 
-                          // Logout small pill
+                          // ✅ Logout Button
                           GestureDetector(
                             onTap: () {
-                              Navigator.popUntil(
-                                  context, (route) => route.isFirst);
+                              final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                              authProvider.logout(context);
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -142,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                                 border: Border.all(
                                     color: Colors.blueGrey.withOpacity(0.2)),
                               ),
-                              child: const Text('LogOut',
+                              child: const Text('Log Out',
                                   style: TextStyle(color: Colors.white)),
                             ),
                           ),
@@ -152,7 +139,6 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 40),
             ],
           ),
@@ -210,86 +196,6 @@ class ProfilePage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-// A placeholder page for the '/programs' route.
-class ProgramsPage extends StatelessWidget {
-  const ProgramsPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Programs and Courses'),
-        backgroundColor: ProfilePage.mainPurple,
-        iconTheme: const IconThemeData(
-            color: Colors.white), // Ensure back arrow is visible
-        titleTextStyle: const TextStyle(
-            color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.school, size: 60, color: ProfilePage.mainPurple),
-            const SizedBox(height: 20),
-            const Text(
-              'This is the Programs & Courses Page',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Colors.black87),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'Content about enrolled and completed courses would go here.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: Colors.black54),
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ProfilePage.mainPurple,
-                foregroundColor: Colors.white,
-                padding:
-                const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              child: const Text('Back to Profile'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'User Profile Application',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: const ProfilePage(),
-      routes: <String, WidgetBuilder>{
-        '/programs': (BuildContext context) => const ProgramsPage(),
-        // Add other routes here if needed, e.g., '/activities', '/settings'
-      },
-      debugShowCheckedModeBanner: false, // Hides the debug banner
     );
   }
 }

@@ -1,367 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'auth_provider.dart';
+import 'custom_widgets.dart';
 import 'login.dart';
 
-
 class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() => _SignUpState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp>{
+class _SignUpState extends State<SignUp> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
-      backgroundColor: Colors.white ,
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SizedBox(height: 80),
+            Image.asset("assets/logo.PNG", width: 100, height: 100),
+            const SizedBox(height: 20),
+            const Text(
+              "Welcome",
+              style: TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF008080)),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              "Create Account",
+              style: TextStyle(fontSize: 18, color: Color(0xFF008080)),
+            ),
+            const SizedBox(height: 20),
 
-      body: Container(
-        child: SingleChildScrollView(
-          //reverse: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start ,
-            mainAxisAlignment: MainAxisAlignment.start ,
-            children: [
-              Container(
-                width: w,
-                margin: EdgeInsets.only(left:10,top: 30),
-                child: Stack(
-                  fit: StackFit.loose ,
-                  children: [
-                    Center(
-                      child: Container(
-                        margin: EdgeInsets.fromLTRB(0.00, 70.0,0.0, 0.0),
-                        width: 30,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                                  "assets/logo.PNG",
-                                ),
-                                fit: BoxFit.cover
-                            )
-                        ),
-                      ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextField(
+                    controller: _emailController,
+                    hintText: "Email",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) return 'Enter email';
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) return 'Enter valid email';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextField(
+                    controller: _passwordController,
+                    hintText: "Password",
+                    isPassword: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) return 'Enter password';
+                      if (value.length < 6) return 'Password min 6 chars';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  CustomTextField(
+                    controller: _confirmController,
+                    hintText: "Confirm Password",
+                    isPassword: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) return 'Confirm password';
+                      if (value != _passwordController.text) return 'Passwords do not match';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  CustomButton(
+                    text: "Sign Up",
+                    isLoading: authProvider.isLoading,
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        authProvider.signup(
+                          _emailController.text.trim(),
+                          _passwordController.text.trim(),
+                          context,
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => const LogIn())),
+                    child: const Text(
+                      "Already have an account? Log In",
+                      style: TextStyle(color: Colors.blueGrey),
                     ),
-
-
-                    Container(
-                      width: w,
-                      margin: const EdgeInsets.only(left: 20,top: 150 ,right: 30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Welcome",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Color(0xFF008080)
-                            ),
-                          ),
-                          Text(
-                            "Create Account",
-                            style: TextStyle(
-                                fontSize: 15,
-                                color: Color(0xFF008080)
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  maxLines: 1,
-                                  autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Full Name"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "User Name"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Id/mail"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Contact Number"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,top: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Age"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Password"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 15,),
-                          Container(
-                            //margin: EdgeInsets.only(left: 10,right: 10 ),
-                            decoration: BoxDecoration(
-                                color: Color(0xFF008080),
-                                borderRadius: BorderRadius.circular(5),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Color(0x14000000),
-                                    offset: Offset(0,10),
-                                    blurRadius: 15,
-                                    spreadRadius: 7,
-
-                                  )
-                                ]
-                            ) ,
-                            height: 40 ,
-                            width: w ,
-                            child: Expanded(
-                              flex : 10,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 10 ,right: 10, top: 8),
-                                child: TextField(
-                                  // maxLines: 1,
-                                  //autofocus: false ,
-                                  style: TextStyle(
-                                    color: Color(0xFF3F7F43),
-                                    fontSize: 15,
-                                  ) ,
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: "Confirm Password"
-                                  ),
-                                ) ,
-                              ),
-                            ) ,
-                          ),
-                          SizedBox(height: 25,),
-                        ],
-                      ),
-                    ),
-                    //singup image
-                    Center(
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 630 ),
-                        child: GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LogIn()));
-                          },
-                          child: Container(
-                            // margin: EdgeInsets.fromLTRB(0.00, 100.0,0.0, 0.0),
-                            width: w*.2,
-                            height: h*.035,
-                            child: Text(
-                              "SignUp",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.blue
-                              ),
-                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
   }
-
 }
