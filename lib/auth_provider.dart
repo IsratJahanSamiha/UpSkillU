@@ -55,10 +55,12 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void logout(BuildContext context) {
-    _token = null;
-    notifyListeners();
-    Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+  Future<void> logout(BuildContext context) async {
+    // Clear tokens or user data
+    // e.g. await prefs.clear();
+
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
+
 
 }

@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header and avatar
+              // 🟣 Header with avatar
               Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -43,11 +43,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   Positioned(
-                    top: 32,
+                    top: 70,
                     left: 0,
                     right: 0,
                     child: Align(
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.center,
                       child: Container(
                         width: 92,
                         height: 92,
@@ -57,89 +57,93 @@ class _ProfilePageState extends State<ProfilePage> {
                           border: Border.all(
                               color: Colors.blueGrey.withOpacity(0.3)),
                         ),
-                        child: const Center(
-                          child:
-                          Icon(Icons.person, size: 42, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 90,
-                    left: 20,
-                    right: 20,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(20, 70, 20, 20),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(18),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              offset: Offset(0, 2))
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          const Text('Full Name',
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
-                          const SizedBox(height: 6),
-                          const Text('School/University Name',
-                              style: TextStyle(
-                                  fontSize: 13, color: Colors.black54)),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              _statBox('120', 'Cumulative\nCredits'),
-                              const SizedBox(width: 10),
-                              _statBox('3.8', 'Cumulative\nGrade Points'),
-                              const SizedBox(width: 10),
-                              _statBox('3.7', 'Cumulative\nGPA'),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          _roundedAction(context, 'Enrolled Courses', () {
-                            Navigator.pushNamed(context, '/programs');
-                          }),
-                          const SizedBox(height: 12),
-                          _roundedAction(context, 'Completed Courses', () {
-                            Navigator.pushNamed(context, '/programs');
-                          }),
-                          const SizedBox(height: 12),
-                          _roundedAction(context, 'Activities & Badges', () {}),
-                          const SizedBox(height: 12),
-                          _roundedAction(context, 'Settings', () {}),
-                          const SizedBox(height: 18),
-
-                          // ✅ Logout Button
-                          GestureDetector(
-                            onTap: () {
-                              final authProvider = Provider.of<AuthProvider>(context, listen: false);
-                              authProvider.logout(context);
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 26, vertical: 10),
-                              decoration: BoxDecoration(
-                                color: mainPurple,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: Colors.blueGrey.withOpacity(0.2)),
-                              ),
-                              child: const Text('Log Out',
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                          ),
-                        ],
+                        child: const Icon(Icons.person,
+                            size: 42, color: Colors.white),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
+
+              const SizedBox(height: 60),
+
+              // 🩶 Profile Info Section
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(18),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 6,
+                        offset: Offset(0, 2))
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    const Text('Full Name',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 6),
+                    const Text('School/University Name',
+                        style: TextStyle(
+                            fontSize: 13, color: Colors.black54)),
+                    const SizedBox(height: 20),
+
+                    // Stats Row
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _statBox('120', 'Cumulative\nCredits'),
+                        const SizedBox(width: 10),
+                        _statBox('3.8', 'Cumulative\nGrade Points'),
+                        const SizedBox(width: 10),
+                        _statBox('3.7', 'Cumulative\nGPA'),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Action buttons
+                    _roundedAction(context, 'Enrolled Courses', () {
+                      Navigator.pushNamed(context, '/programs');
+                    }),
+                    const SizedBox(height: 12),
+                    _roundedAction(context, 'Completed Courses', () {
+                      Navigator.pushNamed(context, '/programs');
+                    }),
+                    const SizedBox(height: 12),
+                    _roundedAction(context, 'Activities & Badges', () {}),
+                    const SizedBox(height: 12),
+                    _roundedAction(context, 'Settings', () {}),
+                    const SizedBox(height: 18),
+
+                    // ✅ Logout Button
+                    GestureDetector(
+                      onTap: () async {
+                        await authProvider.logout(context);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 26, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: mainPurple,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                              color: Colors.blueGrey.withOpacity(0.2)),
+                        ),
+                        child: const Text(
+                          'Log Out',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -188,9 +192,11 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Row(
           children: [
             Expanded(
-              child: Text(text,
-                  style: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600)),
+              child: Text(
+                text,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w600),
+              ),
             ),
             const Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18),
           ],
