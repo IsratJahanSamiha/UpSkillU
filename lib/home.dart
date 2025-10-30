@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   // recentCourses now comes from CourseProvider (mock API). We keep a local
   // placeholder while the provider loads.
 
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
