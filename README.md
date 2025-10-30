@@ -68,6 +68,9 @@ This project is middle point for a Flutter application.
 ### Profile
 ![Profile](assets/screenshot/profile.PNG)
 
+
+
+
 ## 🎬 App Demo
 
 <a href="https://youtube.com/shorts/-wZjWKIYC_c" target="_blank">
@@ -78,13 +81,14 @@ This project is middle point for a Flutter application.
 
 
 
+
 ## 🎬 App Demo: State Management, Mock API & Form Validation
 
-<a href="https://youtu.be/Nca3qqsOyVU" target="_blank">
-  <img src="https://img.youtube.com/vi/Nca3qqsOyVU/0.jpg" alt="Watch the demo" width="600" />
+<a href="https://youtube.com/shorts/72aeYcUxv4M?feature=share" target="_blank">
+  <img src="https://img.youtube.com/vi/72aeYcUxv4M/0.jpg" alt="Watch the demo" width="600" />
 </a>
-
 > 📱 Click the image above to watch the demo video on YouTube.
+
 
 
 Lot of updates comeing soon.
