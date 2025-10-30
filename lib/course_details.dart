@@ -169,8 +169,8 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isEnrolled
-                        ? Colors.pinkAccent
-                        : Colors.blueAccent,
+                        ? Colors.blueAccent
+                        : Color(0xFF6F70E8),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
                       vertical: 12,
@@ -183,57 +183,8 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
               ),
 
               const SizedBox(height: 30),
-              const Divider(thickness: 1),
+             // const Divider(thickness: 1),
 
-              // 💬 Feedback Section
-              const Text(
-                "Feedback",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                controller: _feedbackController,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  hintText: "Write your feedback here...",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: _submitFeedback,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 20,
-                  ),
-                ),
-                child: const Text(
-                  "Submit Feedback",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              if (_feedbackList.isEmpty)
-                const Text(
-                  "No feedback yet.",
-                  style: TextStyle(color: Colors.grey),
-                )
-              else
-                ListView.builder(
-                  itemCount: _feedbackList.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) => Card(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    child: ListTile(
-                      leading: const Icon(Icons.comment, color: Colors.teal),
-                      title: Text(_feedbackList[index]),
-                    ),
-                  ),
-                ),
             ],
           ),
         ),

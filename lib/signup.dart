@@ -33,12 +33,12 @@ class _SignUpState extends State<SignUp> {
             const Text(
               "Welcome",
               style: TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF008080)),
+                  fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF6F70E8)),
             ),
             const SizedBox(height: 10),
             const Text(
               "Create Account",
-              style: TextStyle(fontSize: 18, color: Color(0xFF008080)),
+              style: TextStyle(fontSize: 18, color: Color(0xFF6F70E8)),
             ),
             const SizedBox(height: 20),
 
@@ -99,6 +99,13 @@ class _SignUpState extends State<SignUp> {
                       "Already have an account? Log In",
                       style: TextStyle(color: Colors.blueGrey),
                     ),
+                  ),
+
+                  const SizedBox(height: 20),
+                  const Text(
+                    "UpSkillU",
+                    style: TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF6F70E8)),
                   ),
                 ],
               ),

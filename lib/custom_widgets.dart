@@ -22,7 +22,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xFF008080).withOpacity(0.1),
+        fillColor: const Color(0xFFA5A6F6).withOpacity(0.25),
         hintText: hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF008080),
+          backgroundColor: const Color(0xFFA5A6F6),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         ),
         child: isLoading
