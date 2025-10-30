@@ -293,7 +293,7 @@ class _CourseState extends State<Course> {
         },
       ),
 
-      // ✅ Bottom Navigation Bar
+     /* // ✅ Bottom Navigation Bar
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xFFA5A6F6),
@@ -311,6 +311,8 @@ class _CourseState extends State<Course> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
+      */
+
     );
   }
 }
