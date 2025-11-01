@@ -28,7 +28,11 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           children: [
             const SizedBox(height: 80),
-            Image.asset("assets/logo.PNG", width: 100, height: 100),
+            Image.asset(
+              'assets/eceleratelogo.png',
+              height: 100,
+              width: 180,
+            ),
             const SizedBox(height: 20),
             const Text(
               "Welcome",
@@ -97,7 +101,7 @@ class _SignUpState extends State<SignUp> {
                         Navigator.push(context, MaterialPageRoute(builder: (_) => const LogIn())),
                     child: const Text(
                       "Already have an account? Log In",
-                      style: TextStyle(color: Colors.blueGrey),
+                      style: TextStyle(color: Color(0xFF9596C4)git ),
                     ),
                   ),
 
