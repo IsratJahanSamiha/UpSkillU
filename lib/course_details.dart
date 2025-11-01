@@ -59,6 +59,8 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
+          backgroundColor: const Color(0xFFA5A6F6),
+          elevation: 0.0,
           title: const Text(
             "Course Details",
             style: TextStyle(
@@ -67,17 +69,19 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFA5A6F6), Color(0xFF8A8BF0)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+          actions: [
+            IconButton(
+              onPressed: () {
+                print('Logo clicked!');
+              },
+              icon: Image.asset(
+                'assets/eceleratelogo.png',
+                height: 80,
+                width: 80,
               ),
             ),
-          ),
-          elevation: 0.0,
+          ],
+
           leading: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back, color: Colors.white),

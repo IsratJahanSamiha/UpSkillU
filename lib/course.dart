@@ -70,9 +70,10 @@ class _CourseState extends State<Course> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
-          title: const Align(
-            alignment: Alignment(0, 1),
-            child: Text(
+          backgroundColor: const Color(0xFFA5A6F6),
+          elevation: 0,
+          title:
+            const Text(
               "Choose Your Courses",
               style: TextStyle(
                 color: Colors.white,
@@ -80,7 +81,7 @@ class _CourseState extends State<Course> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),
+
           actions: [
             IconButton(
               onPressed: () {
@@ -93,7 +94,7 @@ class _CourseState extends State<Course> {
               ),
             ),
           ],
-          centerTitle: true,
+          /*centerTitle: true,
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -102,8 +103,8 @@ class _CourseState extends State<Course> {
                 end: Alignment.bottomRight,
               ),
             ),
-          ),
-          elevation: 0.0,
+          ),*/
+
           leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);

@@ -36,8 +36,9 @@ class _HomePageState extends State<HomePage> {
       case 0:
         break;
       case 1:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Tasks Page (Coming Soon)')),
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotificationPage()),
         );
         break;
 
@@ -65,25 +66,20 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xFFA5A6F6),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
         title: const Text(
-          'Welcome,User👋 at Exclerate',
+          'UpSkillU',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications, color: Colors.white),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => NotificationPage()),
-              );
+              print('Logo clicked!');
             },
+            icon: Image.asset(
+              'assets/eceleratelogo.png',
+              height: 80,
+              width: 80,
+            ),
           ),
         ],
       ),
@@ -290,7 +286,7 @@ class _HomePageState extends State<HomePage> {
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notification'),
           BottomNavigationBarItem(
             icon: Icon(Icons.feedback),
             label: 'Feedback',

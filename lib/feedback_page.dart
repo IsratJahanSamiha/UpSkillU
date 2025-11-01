@@ -29,8 +29,16 @@ class _FeedbackPageState extends State<FeedbackPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feedback'),
         backgroundColor: const Color(0xFFA5A6F6),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          'Feedback',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
       ),
       body: SingleChildScrollView( // 👈 allows scrolling when list grows
         padding: const EdgeInsets.all(16.0),

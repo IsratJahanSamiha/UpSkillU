@@ -20,16 +20,30 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: mainTeal,
+        backgroundColor: const Color(0xFFA5A6F6),
         elevation: 0,
-        title: const Text(
-          'My Profile',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
+        title: const Text(
+          'My Profile',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+
+        actions: [
+          IconButton(
+            onPressed: () {
+              print('Logo clicked!');
+            },
+            icon: Image.asset(
+              'assets/eceleratelogo.png',
+              height: 80,
+              width: 80,
+            ),
+          ),
+        ],
+
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
