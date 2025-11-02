@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color(0xFFA5A6F6),
         elevation: 0,
         title: const Text(
-          'UpSkillU',
+          'Welcome,User👋 at Exclerate',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
             TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search courses...',
+                hintText: 'Search for courses, categories, or topics...',
                 prefixIcon: const Icon(Icons.search, color: Color(0xFF008080)),
                 filled: true,
                 fillColor: Colors.white,

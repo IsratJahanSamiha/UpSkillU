@@ -133,7 +133,7 @@ class _CourseState extends State<Course> {
                   controller: searchController,
                   onChanged: filterCourses,
                   decoration: InputDecoration(
-                    hintText: "Search courses...",
+                    hintText: "Search for courses, categories, or topics...",
                     prefixIcon: const Icon(Icons.search),
                     filled: true,
                     fillColor: Colors.grey.shade100,

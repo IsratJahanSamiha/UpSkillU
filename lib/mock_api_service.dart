@@ -47,7 +47,7 @@ class MockApiService {
     },
     {
       'id': '4',
-      'title': 'Java for Beginners',
+      'title': 'Java Advanced Concepts',
       'description':
           'A practical introduction to Java programming: basics, OOP, and simple projects to build confidence.',
       'duration': '5 weeks',
