@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'home.dart';
+import 'notification.dart';
+import 'feedback_page.dart';
+import 'profile.dart';
 
 class CourseDetailsPage extends StatefulWidget {
   final Map<String, String> course;
@@ -34,19 +38,30 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
       _selectedIndex = index;
     });
 
-    // Handle navigation logic here
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
         break;
       case 1:
-        Navigator.pushNamed(context, '/tasks');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotificationPage()),
+        );
         break;
       case 2:
-        Navigator.pushNamed(context, '/feedback');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeedbackPage()),
+        );
         break;
       case 3:
-        Navigator.pushNamed(context, '/profile');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
         break;
     }
   }
@@ -81,7 +96,6 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
               ),
             ),
           ],
-
           leading: GestureDetector(
             onTap: () => Navigator.pop(context),
             child: const Icon(Icons.arrow_back, color: Colors.white),
@@ -174,7 +188,7 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isEnrolled
                         ? Colors.blueAccent
-                        : Color(0xFF6F70E8),
+                        : const Color(0xFF6F70E8),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
                       vertical: 12,
@@ -187,14 +201,12 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
               ),
 
               const SizedBox(height: 30),
-             // const Divider(thickness: 1),
-
             ],
           ),
         ),
       ),
 
-     /* // ✅ Bottom Navigation Bar
+      // ✅ Bottom Navigation Bar (SAME AS HOME)
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xFFA5A6F6),
@@ -204,7 +216,10 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: 'Notification',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.feedback),
             label: 'Feedback',
@@ -212,7 +227,6 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
-      */
     );
   }
 }

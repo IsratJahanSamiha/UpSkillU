@@ -28,16 +28,15 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           children: [
             const SizedBox(height: 80),
-            Image.asset(
-              'assets/eceleratelogo.png',
-              height: 100,
-              width: 180,
-            ),
+            Image.asset('assets/eceleratelogo.png', height: 100, width: 180),
             const SizedBox(height: 20),
             const Text(
               "Welcome",
               style: TextStyle(
-                  fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF6F70E8)),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF6F70E8),
+              ),
             ),
             const SizedBox(height: 10),
             const Text(
@@ -55,7 +54,8 @@ class _SignUpState extends State<SignUp> {
                     hintText: "Email",
                     validator: (value) {
                       if (value == null || value.isEmpty) return 'Enter email';
-                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) return 'Enter valid email';
+                      if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value))
+                        return 'Enter valid email';
                       return null;
                     },
                   ),
@@ -65,7 +65,8 @@ class _SignUpState extends State<SignUp> {
                     hintText: "Password",
                     isPassword: true,
                     validator: (value) {
-                      if (value == null || value.isEmpty) return 'Enter password';
+                      if (value == null || value.isEmpty)
+                        return 'Enter password';
                       if (value.length < 6) return 'Password min 6 chars';
                       return null;
                     },
@@ -76,8 +77,10 @@ class _SignUpState extends State<SignUp> {
                     hintText: "Confirm Password",
                     isPassword: true,
                     validator: (value) {
-                      if (value == null || value.isEmpty) return 'Confirm password';
-                      if (value != _passwordController.text) return 'Passwords do not match';
+                      if (value == null || value.isEmpty)
+                        return 'Confirm password';
+                      if (value != _passwordController.text)
+                        return 'Passwords do not match';
                       return null;
                     },
                   ),
@@ -97,11 +100,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 10),
                   TextButton(
-                    onPressed: () =>
-                        Navigator.push(context, MaterialPageRoute(builder: (_) => const LogIn())),
+                    onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LogIn()),
+                    ),
                     child: const Text(
                       "Already have an account? Log In",
-                      style: TextStyle(color: Color(0xFF9596C4)git ),
+                      style: TextStyle(color: Color(0xFF9596C4)),
                     ),
                   ),
 
@@ -109,7 +114,10 @@ class _SignUpState extends State<SignUp> {
                   const Text(
                     "UpSkillU",
                     style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF6F70E8)),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF6F70E8),
+                    ),
                   ),
                 ],
               ),

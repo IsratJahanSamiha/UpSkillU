@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'course_details.dart';
 import 'course_provider.dart';
+import 'home.dart';
+import 'notification.dart';
+import 'feedback_page.dart';
+import 'profile.dart';
 
 class Course extends StatefulWidget {
   @override
@@ -34,19 +38,30 @@ class _CourseState extends State<Course> {
       _selectedIndex = index;
     });
 
-    // Handle navigation logic here
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
         break;
       case 1:
-        Navigator.pushNamed(context, '/tasks');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NotificationPage()),
+        );
         break;
       case 2:
-        Navigator.pushNamed(context, '/feedback');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FeedbackPage()),
+        );
         break;
       case 3:
-        Navigator.pushNamed(context, '/profile');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
         break;
     }
   }
@@ -72,16 +87,14 @@ class _CourseState extends State<Course> {
         child: AppBar(
           backgroundColor: const Color(0xFFA5A6F6),
           elevation: 0,
-          title:
-            const Text(
-              "Choose Your Courses",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-              ),
+          title: const Text(
+            "Choose Your Courses",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
             ),
-
+          ),
           actions: [
             IconButton(
               onPressed: () {
@@ -94,17 +107,6 @@ class _CourseState extends State<Course> {
               ),
             ),
           ],
-          /*centerTitle: true,
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFA5A6F6), Color(0xFF8A8BF0)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-          ),*/
-
           leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -134,9 +136,9 @@ class _CourseState extends State<Course> {
                   onChanged: filterCourses,
                   decoration: InputDecoration(
                     hintText: "Search for courses, categories, or topics...",
-                    prefixIcon: const Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search, color: Color(0xFF008080)),
                     filled: true,
-                    fillColor: Colors.grey.shade100,
+                    fillColor: Colors.white,
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 12,
                       horizontal: 16,
@@ -149,10 +151,7 @@ class _CourseState extends State<Course> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -182,8 +181,7 @@ class _CourseState extends State<Course> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) =>
-                                      CourseDetailsPage(course: course),
+                                  builder: (_) => CourseDetailsPage(course: course),
                                 ),
                               );
                             },
@@ -213,12 +211,9 @@ class _CourseState extends State<Course> {
                                   const SizedBox(width: 12),
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 10,
-                                      ),
+                                      padding: const EdgeInsets.symmetric(vertical: 10),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             course["title"] ?? '',
@@ -230,52 +225,26 @@ class _CourseState extends State<Course> {
                                           const SizedBox(height: 5),
                                           Text(
                                             "Instructor: ${course["instructor"] ?? 'Unknown'}",
-                                            style: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
+                                            style: const TextStyle(color: Colors.grey),
                                           ),
                                           const SizedBox(height: 5),
                                           Text(
                                             "Start Date: ${course["startDate"] ?? "Coming Soon"}",
-                                            style: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
+                                            style: const TextStyle(color: Colors.grey),
                                           ),
                                           const SizedBox(height: 5),
                                           Text(
                                             course["description"] ?? '',
-                                            style: const TextStyle(
-                                              color: Colors.grey,
-                                            ),
+                                            style: const TextStyle(color: Colors.grey),
                                           ),
                                           const SizedBox(height: 10),
                                           const Row(
                                             children: [
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.star_half,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
-                                              Icon(
-                                                Icons.star_border,
-                                                color: Colors.amber,
-                                                size: 18,
-                                              ),
+                                              Icon(Icons.star, color: Colors.amber, size: 18),
+                                              Icon(Icons.star, color: Colors.amber, size: 18),
+                                              Icon(Icons.star, color: Colors.amber, size: 18),
+                                              Icon(Icons.star_half, color: Colors.amber, size: 18),
+                                              Icon(Icons.star_border, color: Colors.amber, size: 18),
                                             ],
                                           ),
                                         ],
@@ -294,7 +263,7 @@ class _CourseState extends State<Course> {
         },
       ),
 
-     /* // ✅ Bottom Navigation Bar
+      // ✅ Bottom Navigation Bar (SAME AS HOME)
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xFFA5A6F6),
@@ -304,16 +273,11 @@ class _CourseState extends State<Course> {
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Tasks'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feedback),
-            label: 'Feedback',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notification'),
+          BottomNavigationBarItem(icon: Icon(Icons.feedback), label: 'Feedback'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
-      */
-
     );
   }
 }
