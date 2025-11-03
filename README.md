@@ -49,7 +49,7 @@ This project is middle point for a Flutter application.
 ![Course List](assets/screenshot/coursepage.PNG)
 
 ### 🎓 Browse
-![Search](assets/screenshot/search.PNG)
+![Search](assets/screenshot/search.PNG)~
 ![Search](assets/screenshot/searchnone.PNG)
 
 ### 📖 Course Details
@@ -60,7 +60,7 @@ This project is middle point for a Flutter application.
 
 ### Feedback
 ![FeedBack](assets/screenshot/feedback_section.PNG)
-![FeedBack](assets/screenshot/No_feedback.PNG)
+![FeedBack](assets/screenshot/No_feedback.png)
 
 
 ### Notification
